@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.icode.sys.persistence.SysUserMapper" >
+
+  <select id="selectByPrimaryKey" resultType="SysUser" >
+    select `tbid` ,`username` ,`password` ,`type` ,`nick` ,`headimg` ,`telephone` ,`email` ,`sex` ,`home` ,`live` ,`signname` ,`loginx` ,`loginy` ,`mispublish` ,`execute` ,`apply` ,`status`  from sys_user where  `tbid` = #{tbid}
+  </select>
+  
+  <select id="searchByUsername" resultType="SysUser" >
+    select `tbid` ,`username` ,`password` ,`type` ,`nick` ,`headimg` ,`telephone` ,`email` ,`sex` ,`home` ,`live` ,`signname` ,`loginx` ,`loginy` ,`mispublish` ,`execute` ,`apply` ,`status`  from sys_user where  `username` = #{username}
+  </select>
+  
+  <select id="search" resultType="SysUser">
+    select `tbid` ,`username` ,`password` ,`type` ,`nick` ,`headimg` ,`telephone` ,`email` ,`sex` ,`home` ,`live` ,`signname` ,`loginx` ,`loginy` ,`mispublish` ,`execute` ,`apply` ,`status`  from sys_user
+  </select>
+  
+  <insert id="insert" parameterType="com.icode.sys.domain.SysUser" useGeneratedKeys="true" >
+    insert into sys_user (`username` ,`password` ,`type` ,`nick` ,`headimg` ,`telephone` ,`email` ,`sex` ,`home` ,`live` ,`signname` ,`loginx` ,`loginy` ,`mispublish` ,`execute` ,`apply` ,`status` ) values (#{username},#{password},#{type},#{nick},#{headimg},#{telephone},#{email},#{sex},#{home},#{live},#{signname},#{loginx},#{loginy},#{mispublish},#{execute},#{apply},#{status})
+  </insert>
+  
+  <delete id="deleteByPrimaryKey">
+    delete from sys_user where  `tbid` = #{tbid}
+  </delete>
+  
+  <update id="updateByPrimaryKey" parameterType="com.icode.sys.domain.SysUser" >
+    update sys_user set `username` = #{username},`password` = #{password},`type` = #{type},`nick` = #{nick},`headimg` = #{headimg},`telephone` = #{telephone},`email` = #{email},`sex` = #{sex},`home` = #{home},`live` = #{live},`signname` = #{signname},`loginx` = #{loginx},`loginy` = #{loginy},`mispublish` = #{mispublish},`execute` = #{execute},`apply` = #{apply},`status` = #{status} where  `tbid` = #{tbid}
+  </update>
+  
+</mapper>
