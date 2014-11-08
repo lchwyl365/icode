@@ -3,6 +3,8 @@ package com.icode.sys.domain;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class SysUser implements Serializable {
 	
 	public static final String SYS_LOGIN_USER = "sysLoginUser";
@@ -42,6 +44,9 @@ public class SysUser implements Serializable {
 	private Integer apply;//是否申请解封 0:没申请或者申请失败 1:申请成功
 	  
 	private Integer status;//状态 1:在线 0: 离线
+	
+	/**用户 detail表中属性 **/
+	private String realname;
 	  
 	public Long getTbid() {
 		 return tbid;
@@ -185,6 +190,17 @@ public class SysUser implements Serializable {
 	
 	public void setStatus(Integer status) {
 		 this.status = status;
+	}
+
+	public String getRealname() {
+		if(StringUtils.isEmpty(realname)){
+			return username;
+		}
+		return realname;
+	}
+
+	public void setRealname(String realname) {
+		this.realname = realname;
 	}
 	
 }

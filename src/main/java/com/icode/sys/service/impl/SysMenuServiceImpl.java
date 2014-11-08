@@ -7,7 +7,6 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.icode.util.Page;
 import com.icode.sys.domain.SysMenu;
 import com.icode.sys.persistence.SysMenuMapper;
 import com.icode.sys.service.SysMenuService;
@@ -17,10 +16,6 @@ public class SysMenuServiceImpl implements SysMenuService {
 
 	@Resource
 	private SysMenuMapper sysMenuMapper;
-	
-	public SysMenu searchById(Integer tbid){
-		return sysMenuMapper.selectByPrimaryKey(tbid);
-	}
 	
 	@Transactional
 	public int insert(SysMenu sysMenu) {
@@ -33,17 +28,8 @@ public class SysMenuServiceImpl implements SysMenuService {
 	}
 	
 	@Transactional
-	public int delete(Integer tbid){
+	public int delete(Long tbid){
 		return sysMenuMapper.deleteByPrimaryKey(tbid);
-	}
-	
-	public Page search(Page pager) {
-		if(pager == null){
-		  pager = new Page();
-		}
-		List<SysMenu> items = sysMenuMapper.search(pager);
-		pager.setDatas(items);	  
-		return pager;
 	}
 
 	@Override
@@ -58,6 +44,35 @@ public class SysMenuServiceImpl implements SysMenuService {
 			}
 		}
 		return menus;
+	}
+
+	@Override
+	public List<SysMenu> menusWithLeaf() {
+		// 1.查询系统所有的叶子菜单
+		List<SysMenu> menus = sysMenuMapper.menusWithLeaf();
+		
+		// 2.查询子菜单上的按钮
+		for(SysMenu m : menus){
+			List<SysMenu> child = sysMenuMapper.menusWithParent(m);
+			m.setChild(child);
+		}
+		return menus;
+	}
+
+	@Override
+	public List<SysMenu> menusWithRole(Long roleid) {
+
+		return sysMenuMapper.menusWithRole(roleid);
+	}
+
+	@Override
+	public SysMenu menuParentWithTbid(Long menuid) {
+		return sysMenuMapper.menuParentWithTbid(menuid);
+	}
+
+	@Override
+	public SysMenu menuWithTbid(Long menuid) {
+		return sysMenuMapper.menuWithTbid(menuid);
 	}
 
 }

@@ -2,18 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
 <mapper namespace="com.icode.sys.persistence.SysMenuMapper" >
 
-  <select id="selectByPrimaryKey" resultType="SysMenu" >
-    select `tbid` ,`name` ,`url` ,`isparent` ,`parentid` ,`index` ,`type` ,`show`,`icon`  from sys_menu where  `tbid` = #{tbid}
-  </select>
-  
-  <select id="menusWithParent" resultType="SysMenu" >
-    select `tbid` ,`name` ,`url` ,`isparent` ,`parentid` ,`index` ,`type` ,`show`,`icon`  from sys_menu where  `parentid` = #{tbid}
-  </select>
-  
-  <select id="search" resultType="SysMenu">
-    select `tbid` ,`name` ,`url` ,`isparent` ,`parentid` ,`index` ,`type` ,`show`,`icon`  from sys_menu
-  </select>
-  
   <insert id="insert" parameterType="SysMenu" useGeneratedKeys="true" >
     insert into sys_menu (`name` ,`url` ,`isparent` ,`parentid` ,`index` ,`type` ,`show` ) values (#{name},#{url},#{isparent},#{parentid},#{index},#{type},#{show})
   </insert>
@@ -25,5 +13,28 @@
   <update id="updateByPrimaryKey" parameterType="SysMenu" >
     update sys_menu set `name` = #{name},`url` = #{url},`isparent` = #{isparent},`parentid` = #{parentid},`index` = #{index},`type` = #{type},`show` = #{show} where  `tbid` = #{tbid}
   </update>
+  
+  <select id="menuWithTbid" resultType="SysMenu" >
+    select `tbid` ,`name` ,`url` ,`isparent` ,`parentid` ,`index` ,`type` ,`show`,`icon`  from sys_menu where `tbid` = #{tbid}
+  </select>
+  
+  <select id="menuParentWithTbid" resultType="SysMenu" >
+    select `tbid` ,`name` ,`url` ,`isparent` ,`parentid` ,`index` ,`type` ,`show`,`icon`  from sys_menu where  `tbid` = (
+    	select `parentid` from sys_menu where `tbid` = #{menuid}
+    )
+  </select>
+  
+  <select id="menusWithLeaf" resultType="SysMenu" >
+    select `tbid` ,`name` ,`url` ,`isparent` ,`parentid` ,`index` ,`type` ,`show`,`icon`  from sys_menu where  `isparent` = 0 and `type` = 1
+  </select>
+  
+  <select id="menusWithParent" resultType="SysMenu" >
+    select `tbid` ,`name` ,`url` ,`isparent` ,`parentid` ,`index` ,`type` ,`show`,`icon`  from sys_menu where  `parentid` = #{tbid}
+  </select>
+  
+  <select id="menusWithRole" resultType="SysMenu" >
+    select m.`tbid` ,m.`name` ,m.`url` ,m.`isparent` ,m.`parentid` ,m.`index` ,m.`type` ,m.`show`,m.`icon` from sys_menu m,sys_role_menu rm 
+ 	where m.tbid = rm.menuid and m.`isparent` = 0 and rm.roleid = #{roleid}
+  </select>
   
 </mapper>

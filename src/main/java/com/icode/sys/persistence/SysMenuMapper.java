@@ -2,24 +2,30 @@ package com.icode.sys.persistence;
 
 import java.util.List;
 
-import com.icode.util.Page;
-
 import org.apache.ibatis.annotations.Param;
 
 import com.icode.sys.domain.SysMenu;
 
 public interface SysMenuMapper {
 	
-    int deleteByPrimaryKey(@Param(value="tbid")Integer tbid);
-
+	//添加
     int insert(SysMenu sysMenu);
+    
+    //删除
+    int deleteByPrimaryKey(@Param(value="tbid")Long tbid);
 
-    SysMenu selectByPrimaryKey(@Param(value="tbid")Integer tbid);
-
+    //修改
     int updateByPrimaryKey(SysMenu sysMenu);
 
-	List<SysMenu> search(Page pager);
-
+    //查询
 	List<SysMenu> menusWithParent(SysMenu sysMenu);
+	
+	List<SysMenu> menusWithLeaf();
+
+	List<SysMenu> menusWithRole(Long roleid);
+
+	SysMenu menuParentWithTbid(Long menuid);
+
+	SysMenu menuWithTbid(Long tbid);
 	
 }

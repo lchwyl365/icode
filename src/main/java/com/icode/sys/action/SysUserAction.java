@@ -6,9 +6,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.github.pagehelper.PageInfo;
 import com.icode.sys.domain.SysUser;
 import com.icode.sys.service.SysUserService;
-import com.icode.util.Page;
 import com.icode.util.ResultJson;
 import com.icode.util.SHATool;
 
@@ -18,8 +18,6 @@ import com.icode.util.SHATool;
 public class SysUserAction extends BaseAction {
 
 	private SysUser sysUser;
-	
-	private Page pager;
 	
 	private ResultJson resultJson;
 	
@@ -31,7 +29,7 @@ public class SysUserAction extends BaseAction {
 	public String login(){
 		int result = 3;
 		if(sysUser != null && StringUtils.isNotEmpty(sysUser.getUsername())){
-			SysUser tempUser = sysUserService.searchByUsername(sysUser.getUsername());
+			SysUser tempUser = sysUserService.userWithUsername(sysUser.getUsername());
 			
 			if(tempUser != null){
 				String pwdcode = new SHATool().getDigestOfString(sysUser.getPassword().trim().getBytes());
@@ -50,7 +48,7 @@ public class SysUserAction extends BaseAction {
 	}
 
 	public String index(){
-		pager = sysUserService.search(pager);
+		//pager = sysUserService.search(pager);
 		return "index";
 	}
 	
@@ -68,7 +66,7 @@ public class SysUserAction extends BaseAction {
 	}
 	
 	public String intoUpdate(){
-		sysUser = sysUserService.searchById(sysUser.getTbid());
+		sysUser = sysUserService.userWithId(sysUser.getTbid());
 		return "intoUpdate";
 	}
 	
@@ -94,16 +92,11 @@ public class SysUserAction extends BaseAction {
 		this.resultJson = resultJson;
 	}
 
-	public Page getPager() {
-		return pager;
-	}
-	public void setPager(Page pager) {
-		this.pager = pager;
-	}
 	public String getBackurl() {
 		return backurl;
 	}
 	public void setBackurl(String backurl) {
 		this.backurl = backurl;
 	}
+	
 }

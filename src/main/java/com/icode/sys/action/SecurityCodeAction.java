@@ -1,6 +1,7 @@
 package com.icode.sys.action;
 import java.io.ByteArrayInputStream;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.icode.util.SecurityCode;
@@ -13,6 +14,7 @@ import com.icode.util.SecurityImage;
  */
 @SuppressWarnings("serial")
 @Controller("securityCodeAction")
+@Scope("prototype")
 public class SecurityCodeAction extends BaseAction{
     
     //图片流

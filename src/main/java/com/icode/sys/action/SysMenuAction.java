@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import com.icode.sys.domain.SysMenu;
 import com.icode.sys.domain.SysUser;
 import com.icode.sys.service.SysMenuService;
-import com.icode.util.Page;
 
 @SuppressWarnings("serial")
 @Controller
@@ -18,8 +17,6 @@ import com.icode.util.Page;
 public class SysMenuAction extends BaseAction {
 
 	private SysMenu sysMenu;
-	
-	private Page pager;
 	
 	private int result;
 	
@@ -31,7 +28,7 @@ public class SysMenuAction extends BaseAction {
 	private SysMenuService sysMenuService;
 
 	public String index(){
-		pager = sysMenuService.search(pager);
+		//pager = sysMenuService.search(pager);
 		return "index";
 	}
 	
@@ -63,11 +60,6 @@ public class SysMenuAction extends BaseAction {
 		return "result-json";
 	}
 	
-	public String intoUpdate(){
-		sysMenu = sysMenuService.searchById(sysMenu.getTbid());
-		return "intoUpdate";
-	}
-	
 	public String update(){
 		result = sysMenuService.update(sysMenu);
 		backurl = "front/sysMenu_intoUpdate.action?sysMenu.tbid="+sysMenu.getTbid();
@@ -85,12 +77,6 @@ public class SysMenuAction extends BaseAction {
 	}
 	public void setResult(int result) {
 		this.result = result;
-	}
-	public Page getPager() {
-		return pager;
-	}
-	public void setPager(Page pager) {
-		this.pager = pager;
 	}
 	public String getBackurl() {
 		return backurl;

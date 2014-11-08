@@ -43,6 +43,18 @@
 	<bean id="mySqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="myDataSource" />
 		<property name="typeAliasesPackage" value="com.icode" />
+		<property name="plugins">
+		    <array>
+		      <bean class="com.github.pagehelper.PageHelper">
+		        <property name="properties">
+		          <value>
+		            dialect=mysql
+		            reasonable=true
+		          </value>
+		        </property>
+		      </bean>
+		    </array>
+		  </property> 
 	</bean>
 
 	<!-- 注册Mapper方式二：也可不指定特定mapper，而使用自动扫描包的方式来注册各种Mapper ，配置如下：-->

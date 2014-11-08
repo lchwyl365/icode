@@ -1,12 +1,13 @@
 package com.icode.sys.service;
-import com.icode.util.Page;
+import java.util.List;
+
 import com.icode.sys.domain.SysUser;
 
 public interface SysUserService {
 
-	SysUser searchById(Long tbid);
+	SysUser userWithId(Long tbid);
 	
-	Page search(Page pager);
+	//Page search(Page pager);
 	
 	int insert(SysUser sysUser);
 
@@ -19,6 +20,18 @@ public interface SysUserService {
 	 * @param username
 	 * @return
 	 */
-	SysUser searchByUsername(String username);
+	SysUser userWithUsername(String username);
+	/**
+	 * 根据用户类型查找用户
+	 * @param type
+	 * @return
+	 */
+	List<SysUser> usersWithType(int type);
+	/***
+	 * 根据用户角色信息查找用户
+	 * @param roleid
+	 * @return
+	 */
+	List<SysUser> userWithRole(Long roleid);
 	
 }

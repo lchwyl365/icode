@@ -9,6 +9,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.icode.sys.domain.Attribute;
@@ -16,6 +17,7 @@ import com.icode.sys.service.CodeService;
 
 @SuppressWarnings("serial")
 @Controller("codeAction")
+@Scope("prototype")
 public class CodeAction extends BaseAction {
 
 	private String packageName;

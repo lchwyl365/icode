@@ -22,6 +22,16 @@
 			<result name="result-json" type="json">
 				<param name="root">resultJson</param>
 			</result>
+			<result name="usersWithType" type="json">
+				<param name="root">userInfo</param>
+			</result>
+			<result name="result-jsp">${backurl}</result>
+		</action>
+		
+		<action name="role_*" class="sysRoleAction" method="{1}">
+			<result name="result-json" type="json">
+				<param name="root">resultJson</param>
+			</result>
 			<result name="result-jsp">${backurl}</result>
 		</action>
 		

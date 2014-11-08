@@ -5,7 +5,7 @@ import java.util.List;
 
 public class SysMenu implements Serializable {
 	
-	private Integer tbid;//
+	private Long tbid;//
 	  
 	private String name;//
 	  
@@ -13,7 +13,7 @@ public class SysMenu implements Serializable {
 	  
 	private Integer isparent;//是否为父级菜单
 	  
-	private Integer parentid;//所尾父级菜单id
+	private Long parentid;//所尾父级菜单id
 	  
 	private Integer index;//同级菜单中的顺序
 	  
@@ -24,15 +24,23 @@ public class SysMenu implements Serializable {
 	private List<SysMenu> child;
 	
 	private String icon;
-	  
-	public Integer getTbid() {
-		 return tbid;
-	}
 	
-	public void setTbid(Integer tbid) {
-		 this.tbid = tbid;
+	public Long getTbid() {
+		return tbid;
 	}
-	
+
+	public void setTbid(Long tbid) {
+		this.tbid = tbid;
+	}
+
+	public Long getParentid() {
+		return parentid;
+	}
+
+	public void setParentid(Long parentid) {
+		this.parentid = parentid;
+	}
+
 	public String getName() {
 		 return name;
 	}
@@ -55,14 +63,6 @@ public class SysMenu implements Serializable {
 	
 	public void setIsparent(Integer isparent) {
 		 this.isparent = isparent;
-	}
-	
-	public Integer getParentid() {
-		 return parentid;
-	}
-	
-	public void setParentid(Integer parentid) {
-		 this.parentid = parentid;
 	}
 	
 	public Integer getIndex() {

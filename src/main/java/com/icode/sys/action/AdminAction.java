@@ -1,5 +1,6 @@
 package com.icode.sys.action;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.icode.sys.domain.SysUser;
@@ -7,6 +8,7 @@ import com.icode.util.ResultJson;
 
 @SuppressWarnings("serial")
 @Controller("adminAction")
+@Scope("prototype")
 public class AdminAction extends BaseAction {
 
 	private String backurl;
