@@ -1,6 +1,7 @@
 package com.icode.sys.service;
 import java.util.List;
 
+import com.github.pagehelper.PageInfo;
 import com.icode.sys.domain.SysUser;
 
 public interface SysUserService {
@@ -33,5 +34,11 @@ public interface SysUserService {
 	 * @return
 	 */
 	List<SysUser> userWithRole(Long roleid);
+
+	PageInfo usersWithType(int pagerNumber, int type);
+
+	int updateRealName(SysUser sysUser);
+
+	int cancelAdmin(List<Long> userids);
 	
 }

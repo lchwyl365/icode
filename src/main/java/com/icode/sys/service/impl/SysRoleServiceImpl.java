@@ -138,6 +138,9 @@ public class SysRoleServiceImpl implements SysRoleService {
 		int res = 1;
 		sysRoleMapper.deleteRoleUser(sysRole.getTbid());
 		sysRoleMapper.deleteRoleMenu(sysRole.getTbid());
+		
+		// 修改角色名称
+		sysRoleMapper.updateByPrimaryKey(sysRole);
 
 		// 2.为角色添加用户
 		for (Long userid : userids) {
@@ -168,6 +171,24 @@ public class SysRoleServiceImpl implements SysRoleService {
 			sysRoleMapper.inserRoleMenu(roleMenu);
 		}
 		return res;
+	}
+
+	@Transactional
+	public int delete(List<Long> roleids) {
+		int res = 1;
+		try {
+			sysRoleMapper.deleteRoleMenus(roleids);
+			sysRoleMapper.deleteRoleUsers(roleids);
+			res = sysRoleMapper.deleteBatch(roleids);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	@Override
+	public List<SysRole> rolesWithUser(Long userid) {
+		return sysRoleMapper.rolesWithUser(userid);
 	}
  
 }

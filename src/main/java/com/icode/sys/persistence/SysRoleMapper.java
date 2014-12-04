@@ -27,5 +27,13 @@ public interface SysRoleMapper {
 	int deleteRoleUser(Long roleid);
 
 	int deleteRoleMenu(Long roleid);
+
+	int deleteBatch(List<Long> roleids);
+
+	void deleteRoleUsers(List<Long> roleids);
+
+	void deleteRoleMenus(List<Long> roleids);
+
+	List<SysRole> rolesWithUser(Long userid);
  
 }

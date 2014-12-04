@@ -23,18 +23,19 @@
     <link type="text/css" rel="stylesheet" href="${contextPath}/plugin/buttons/css/font-awesome.min.css" />
 	<link type="text/css" rel="stylesheet" href="${contextPath}/plugin/buttons/css/buttons.css" />
 	
-	<link href="${contextPath}/plugin/icheck/skins/square/red.css" rel="stylesheet">
+	<link type="text/css" rel="stylesheet" href="${contextPath}/plugin/icheck/skins/square/red.css" />
 	
   </head>
   <body style="overflow:hidden">
     <div style="overflow:hidden;">
     	<div class="table_toolbar">
 	    	<a href="#" class="button button-rounded button-flat-action" id="add-button"><i class="icon-plus"></i> 新增职务</a>
-	    	<a href="#" class="button button-rounded button-flat-primary"><i class="icon-trash"></i> 删除职务</a>
+	    	<a href="#" class="button button-rounded button-flat-primary" id="del-button"><i class="icon-trash"></i> 删除职务</a>
 	    </div>
 		<table class="table table-hover">
 	      <thead>
 	        <tr>
+	          <th style="width:40px;"><input type="checkbox" id="role_ck_all"/></th>
 	          <th>职务名称</th>
 	          <th>人员</th>
 	        </tr>
@@ -42,6 +43,7 @@
 	      <tbody>
 	      	<s:iterator value="pageInfo.list" id="item">
 	      		<tr class="role_tr" roleid="${item.tbid}" rolename="${item.rolename}" userids="${item.userids}" menuids="${item.menuids}">
+		          <td><input type="checkbox" class="role_ck" roleid="${item.tbid}"/></td>
 		          <td><s:property value="#item.rolename" /></td>
 		          <td><s:property value="#item.userStr" /></td>
 		        </tr>
@@ -103,7 +105,7 @@
 						</div>
 					</div>
 					<div class="attr-list-div attr-list-role-div" >
-						<div class="attr-list-title-div">设置权限</div>
+						<div class="attr-list-title-div">设置权限   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox" id="checkAll" />  全选</div>
 						<div class="attr-table-persion-div" style="overflow-y:auto;height:389px;">
 							<table class="table table-hover" >
 								<s:iterator value="menus" id="menu">
@@ -133,6 +135,8 @@
     <script src="${contextPath}/js/bootstrap.min.js"></script>
  	<script src="${contextPath}/plugin/icheck/icheck.min.js"></script>
  	<script src="${contextPath}/plugin/jquery.nicescroll/jquery.nicescroll.min.js"></script>
+ 	<script src="${contextPath}/plugin/lhgdialog/lhgdialog.js?skin=mac"></script>
+ 	
     <script type="text/javascript">
     var width = 0;
     var height = 0;
@@ -149,6 +153,21 @@
 		//移动显示属性面板
 		$("#attr-div").animate({right:0}, "normal");
   	}
+  	function addInitRole(){
+		isadd = 1;
+		openAttr();
+		//清除数据
+    	var rolename = $(this).attr("rolename");
+    	$("#rolename").val("")
+    	
+    	$(".roleuser").each(function(){
+    		$(this).iCheck('uncheck');
+    	});
+    	
+    	$(".rolemenu").each(function(){
+    		$(this).iCheck('uncheck');
+    	});
+	}
   	function addRole(){
     	var rolename = $.trim($("#rolename").val());
     	if(rolename == ""){
@@ -163,17 +182,28 @@
     	}else{
     		url = "${contextPath}/admin/role_update.action?sysRole.data_flag=0&sysRole.tbid="+roleid+"&sysRole.rolename="+rolename;
     	}
-    	
+    	var unCheckUser = true;
 	    $(".roleuser").each(function(){
 	    	if($(this).prop("checked")==true){
+	    		unCheckUser = false;
 	    		url += "&userids="+$(this).attr("userid");
 	    	}
 	    });
+	    if(unCheckUser){
+	    	alert("请选择该职务的用户！");
+	    	return;
+	    }
+	    var unCheckMenu = true;
 	 	$(".rolemenu").each(function(){
   		 	if($(this).prop("checked")==true){
+  		 		unCheckMenu = false;
   		 		url += "&menuids="+$(this).attr("menuid");
   		 	}
 	    });
+	 	if(unCheckMenu){
+	    	alert("请选择该职务可以访问的菜单！");
+	    	return;
+	    }
     	$.ajax({
     		   type: "POST",
     		   url: url,
@@ -181,10 +211,95 @@
     		      if(msgs.result == 1){
     		    	  window.self.location = "${contextPath}/admin/role_index.action";
     		      }else{
-    		    	  alert("添加职务失败！");
+    		    	  if(isadd == 1){
+    		    		  alert("添加职务失败！");
+    		    	  }else{
+    		    		  alert("修改职务失败！");
+    		    	  }
     		      }
     		   }
     	});
+    }
+  	function delRole(){
+  		
+  		var roleids = new Array();
+  		var url = "${contextPath}/admin/role_delete.action?1=1";
+  		$(".role_ck").each(function(){
+  			var check = $(this).prop("checked");
+  			if(check){
+  				var roleid = $(this).attr("roleid");
+  				roleids.push(roleid);
+  				url += "&roleids="+roleid;
+  			}
+  		});
+  		if(roleids.length == 0){
+  			alert("请选择要删除的职务！");
+  			return;
+  		}
+  		
+  		$.dialog({
+  			lock: true,
+  			width: '300px',
+  		    height: 100,
+  		    title: '确认信息',
+  		    content: '<h4 style="font: 16px/22px Microsoft YaHei;">确认删除职务？</h4>',
+  		  	icon: 'prompt.gif',
+  		    ok: function(){
+  		    	
+  		    	$.ajax({
+  	    		   type: "POST",
+  	    		   url: url,
+  	    		   success: function(msgs){
+  	    		      if(msgs.result == 1){
+  	    		    	  window.self.location = "${contextPath}/admin/role_index.action";
+  	    		      }else{
+  	    		    	  alert("删除职务失败！");
+  	    		      }
+  	    		   }
+  	    	    });
+  		        return false;
+  		    },
+  		    cancelVal: '关闭',
+  		    cancel: true,
+  		  	max: false,
+  	    	min: false
+  		});
+  	}
+	function roleClick(){
+      	isadd = 0;
+      	openAttr();
+      	// 5.1 设置角色名称
+      	var rolename = $(this).attr("rolename");
+      	$("#rolename").val(rolename);
+      	
+      	var roleid = $(this).attr("roleid");
+      	$("#roleid").val(roleid);
+      	
+      	// 5.2 设置角色用户
+      	$(".roleuser").each(function(){
+      		$(this).iCheck('uncheck');
+      	});
+      	var userstr = $(this).attr("userids");
+      	if(userstr != ""){
+      		var userids = userstr.split(",");
+          	for(var i = 0 ; i < userids.length; i++){
+          		var tbid = userids[i];
+			$("#user_"+tbid).iCheck('check');
+          	}
+      	}
+      	
+      	// 5.3 设置用户权限
+      	$(".rolemenu").each(function(){
+      		$(this).iCheck('uncheck');
+      	});
+      	var menustr = $(this).attr("menuids");
+      	if(menustr != ""){
+      		var menuids = menustr.split(",");
+          	for(var i = 0 ; i < menuids.length; i++){
+          		var tbid = menuids[i];
+			$("#menu_"+tbid).iCheck('check');
+          	}
+      	}
     }
     $(document).ready(function() 
     {
@@ -197,22 +312,10 @@
 		$("#attr-div").css("right",0-width);
 		$("#attr-close-div").css("top",height * 0.5);
 		
-		//2、为添加按钮添加事件
-    	$("#add-button").click(function(){
-    		isadd = 1;
-    		openAttr();
-    		//清除数据
-        	var rolename = $(this).attr("rolename");
-        	$("#rolename").val("")
-        	
-        	$(".roleuser").each(function(){
-        		$(this).iCheck('uncheck');
-        	});
-        	
-        	$(".rolemenu").each(function(){
-        		$(this).iCheck('uncheck');
-        	});
-    	});
+		//2、为添加删除按钮添加事件
+    	$("#add-button").click(addInitRole);
+		$("#del-button").click(delRole);
+		
     	//3、取消面板的显示
     	$("#btn-cancel").click(closeAttr);
     	$("#attr-close-div").click(closeAttr);
@@ -232,42 +335,33 @@
         $("#btn-ok").click(addRole);
         
         //5、为表格添加事件
-        $(".role_tr").click(function(){
-        	isadd = 0;
-        	openAttr();
-        	// 5.1 设置角色名称
-        	var rolename = $(this).attr("rolename");
-        	$("#rolename").val(rolename);
+        $(".role_tr").click(roleClick);
+        
+        //6、 全选
+        $('#checkAll').on('ifChanged', function(event){
+			var check = $("#checkAll").prop("checked");
         	
-        	var roleid = $(this).attr("roleid");
-        	$("#roleid").val(roleid);
-        	
-        	// 5.2 设置角色用户
-        	$(".roleuser").each(function(){
-        		$(this).iCheck('uncheck');
-        	});
-        	var userstr = $(this).attr("userids");
-        	if(userstr != ""){
-        		var userids = userstr.split(",");
-            	for(var i = 0 ; i < userids.length; i++){
-            		var tbid = userids[i];
-					$("#user_"+tbid).iCheck('check');
-            	}
-        	}
-        	
-        	// 5.3 设置用户权限
         	$(".rolemenu").each(function(){
-        		$(this).iCheck('uncheck');
-        	});
-        	var menustr = $(this).attr("menuids");
-        	if(menustr != ""){
-        		var menuids = menustr.split(",");
-            	for(var i = 0 ; i < menuids.length; i++){
-            		var tbid = menuids[i];
-					$("#menu_"+tbid).iCheck('check');
-            	}
-        	}
-        });
+        		if(check == true){
+        			$(this).iCheck('check');
+      		 	}else{
+      		 		$(this).iCheck('uncheck');
+      		 	}
+          	});
+		});
+        
+        $('#role_ck_all').on('ifChanged', function(event){
+			var check = $("#role_ck_all").prop("checked");
+        	
+        	$(".role_ck").each(function(){
+        		if(check == true){
+        			$(this).iCheck('check');
+      		 	}else{
+      		 		$(this).iCheck('uncheck');
+      		 	}
+          	});
+		});
+
     });
     </script>
   </body>

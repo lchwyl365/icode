@@ -1,7 +1,6 @@
 package com.icode.sys.domain;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -47,6 +46,8 @@ public class SysUser implements Serializable {
 	
 	/**用户 detail表中属性 **/
 	private String realname;
+	
+	private String roleStr;//职务信息
 	  
 	public Long getTbid() {
 		 return tbid;
@@ -201,6 +202,14 @@ public class SysUser implements Serializable {
 
 	public void setRealname(String realname) {
 		this.realname = realname;
+	}
+
+	public String getRoleStr() {
+		return roleStr;
+	}
+
+	public void setRoleStr(String roleStr) {
+		this.roleStr = roleStr;
 	}
 	
 }

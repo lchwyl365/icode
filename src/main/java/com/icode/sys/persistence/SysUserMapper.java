@@ -21,5 +21,9 @@ public interface SysUserMapper {
 	List<SysUser> usersWithType(int type);
 
 	List<SysUser> userWithRole(Long roleid);
+
+	int updateRealName(SysUser sysUser);
+
+	int updateType(Long tbid);
 	
 }

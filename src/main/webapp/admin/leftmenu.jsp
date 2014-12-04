@@ -12,7 +12,6 @@
     	  	<s:if test="#st.last">
     	  		<s:set value="'menulink menuitem_b'" name="linkClass" ></s:set>
     	  	</s:if>
-    	  	
     	  	<li><a href="#" class="${linkClass}" parentid="${menu.tbid}" style="${linkStyle}" url="${submenu.url}"><s:property value="#submenu.name" /></a></li>
     	  </s:iterator>
 		</ul>

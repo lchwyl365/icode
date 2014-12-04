@@ -34,4 +34,12 @@
     update sys_user set `username` = #{username},`password` = #{password},`type` = #{type},`nick` = #{nick},`headimg` = #{headimg},`telephone` = #{telephone},`email` = #{email},`sex` = #{sex},`home` = #{home},`live` = #{live},`signname` = #{signname},`loginx` = #{loginx},`loginy` = #{loginy},`mispublish` = #{mispublish},`execute` = #{execute},`apply` = #{apply},`status` = #{status} where  `tbid` = #{tbid}
   </update>
   
+  <update id="updateRealName" parameterType="com.icode.sys.domain.SysUser" >
+    update sys_user_detail set `realname` = #{realname} where `tbid` = #{tbid}
+  </update>
+  
+  <update id="updateType" parameterType="com.icode.sys.domain.SysUser" >
+    update sys_user set `type` = 0 where `tbid` = #{tbid}
+  </update>
+  
 </mapper>

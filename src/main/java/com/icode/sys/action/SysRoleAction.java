@@ -39,6 +39,8 @@ public class SysRoleAction extends BaseAction {
 	
 	private List<Long> menuids;
 	
+	private List<Long> roleids;
+	
 	@Resource
 	private SysRoleService sysRoleService;
 	
@@ -70,7 +72,7 @@ public class SysRoleAction extends BaseAction {
 	}
 	
 	public String delete(){
-		int result = sysRoleService.delete(sysRole.getTbid());
+		int result = sysRoleService.delete(roleids);
 		resultJson = new ResultJson(result);
 		return "result-json";
 	}
@@ -147,6 +149,14 @@ public class SysRoleAction extends BaseAction {
 
 	public void setPageNumber(int pageNumber) {
 		this.pageNumber = pageNumber;
+	}
+
+	public List<Long> getRoleids() {
+		return roleids;
+	}
+
+	public void setRoleids(List<Long> roleids) {
+		this.roleids = roleids;
 	}
 	
 }

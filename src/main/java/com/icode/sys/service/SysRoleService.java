@@ -3,7 +3,6 @@ import java.util.List;
 
 import com.github.pagehelper.PageInfo;
 import com.icode.sys.domain.SysRole;
-import com.icode.util.Pager;
  
 public interface SysRoleService {
  
@@ -22,7 +21,9 @@ public interface SysRoleService {
  
 	int update(SysRole sysRole, List<Long> userids, List<Long> menuids);
 	
-	int delete(Long tbid);
+	int delete(List<Long> roleids);
+
+	List<SysRole> rolesWithUser(Long tbid);
 	
 }
  
