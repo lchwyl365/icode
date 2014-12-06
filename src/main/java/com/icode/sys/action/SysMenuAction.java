@@ -24,6 +24,8 @@ public class SysMenuAction extends BaseAction {
 	
 	private List<SysMenu> menus;
 	
+	private String menuType;
+	
 	@Resource
 	private SysMenuService sysMenuService;
 
@@ -91,6 +93,14 @@ public class SysMenuAction extends BaseAction {
 
 	public void setMenus(List<SysMenu> menus) {
 		this.menus = menus;
+	}
+
+	public String getMenuType() {
+		return menuType;
+	}
+
+	public void setMenuType(String menuType) {
+		this.menuType = menuType;
 	}
 	
 }

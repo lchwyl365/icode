@@ -31,7 +31,7 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <s:action name="menu_searchMenus" namespace="/admin" executeResult="true" ignoreContextParams="true">
-          	<s:param name="sysMenu.tbid" value="'1'"></s:param> 
+          	<s:param name="menuType" value="type"></s:param> 
           </s:action>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" style="padding:0px;">
@@ -112,6 +112,12 @@
         //设置iframe的高度，iframe的高度由iframe中的页面高度决定。
         var height = $(window).height() - 70;
      	$("#contentFrame").height(height);
+     	
+     	//顶部连接点击
+     	$(".topLink").click(function(){
+     		var tbid = $(this).attr("tbid");
+     		alert(tbid);
+     	});
       });
     </script>
   </body>

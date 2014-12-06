@@ -15,6 +15,8 @@ public class AdminAction extends BaseAction {
 	
 	private ResultJson resultJson;
 	
+	private String type;
+	
 	/***
 	 * 进入管理主界面
 	 * @return
@@ -46,6 +48,14 @@ public class AdminAction extends BaseAction {
 
 	public void setResultJson(ResultJson resultJson) {
 		this.resultJson = resultJson;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 	
 }
