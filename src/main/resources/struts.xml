@@ -10,7 +10,7 @@
 	<constant name="struts.i18n.encoding" value="UTF-8" />
 	<constant name="struts.ui.theme" value="simple" />
 	<constant name="struts.locale" value="zh_CN" />
-	<constant name="struts.multipart.maxSize" value="20971520"/>
+	<constant name="struts.multipart.maxSize" value="1000000000"/>
 
 	<package name="admin" extends="json-default" namespace="/admin">
 		
