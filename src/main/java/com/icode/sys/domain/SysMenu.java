@@ -3,6 +3,8 @@ package com.icode.sys.domain;
 import java.io.Serializable;
 import java.util.List;
 
+import com.icode.util.DecUtil;
+
 public class SysMenu implements Serializable {
 	
 	private Long tbid;//
@@ -24,6 +26,10 @@ public class SysMenu implements Serializable {
 	private List<SysMenu> child;
 	
 	private String icon;
+	
+	private String sysflag;
+	
+	private String menucode;
 	
 	public Long getTbid() {
 		return tbid;
@@ -103,6 +109,30 @@ public class SysMenu implements Serializable {
 
 	public void setIcon(String icon) {
 		this.icon = icon;
+	}
+
+	public String getSysflag() {
+		return sysflag;
+	}
+
+	public void setSysflag(String sysflag) {
+		this.sysflag = sysflag;
+	}
+
+	public String getMenucode(){
+		String code = "";
+		try {
+			DecUtil util = new DecUtil();  
+			String msg =tbid+"";  
+			code = util.encrypt(msg);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return code;
+	}
+
+	public void setMenucode(String menucode) {
+		this.menucode = menucode;
 	}
 	
 }

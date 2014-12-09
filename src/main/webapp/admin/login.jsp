@@ -55,6 +55,7 @@
 
 <script type="text/javascript" src="${contextPath}/js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="${contextPath}/plugin/jquery.placeholder.js"></script>
+<script type="text/javascript" src="${contextPath}/js/base64.js"></script>
 <script>
 $(function(){
   $("#login-ran").click(function(){
@@ -77,7 +78,7 @@ $(function(){
       }else if(msg.result == 1){
     	$("#errormsg").css("color","#36A803");
         $("#errormsg").html("登录成功");
-        window.self.location = "${contextPath}/admin/admin_index.action";
+        window.self.location = "${contextPath}/admin/admin_index.action?parentMenuId=1000000";
       }else{
     	$("#errormsg").css("color","#ff0000");
         $("#errormsg").html("用户名不正确");

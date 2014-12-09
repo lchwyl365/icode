@@ -43,7 +43,7 @@ public class SysUserAction extends BaseAction {
 				String pwdcode = new SHATool().getDigestOfString(sysUser.getPassword().trim().getBytes());
 				if(pwdcode.equals(tempUser.getPassword())){
 					result = 1;
-					this.httpSession.setAttribute(SysUser.SYS_LOGIN_USER, sysUser);
+					this.httpSession.setAttribute(SysUser.SYS_LOGIN_USER, tempUser);
 				}else{//密码不正确
 					result = 2;
 				}
@@ -53,6 +53,12 @@ public class SysUserAction extends BaseAction {
 		}
 		resultJson = new ResultJson(result);
 		return "result-json";
+	}
+	
+	public String exit(){
+		this.httpSession.setAttribute(SysUser.SYS_LOGIN_USER, null);
+		backurl = "/admin/login.jsp";
+		return "result-jsp";
 	}
 
 	public String index(){

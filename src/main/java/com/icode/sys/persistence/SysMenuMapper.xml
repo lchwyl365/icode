@@ -15,25 +15,25 @@
   </update>
   
   <select id="menuWithTbid" resultType="SysMenu" >
-    select `tbid` ,`name` ,`url` ,`isparent` ,`parentid` ,`index` ,`type` ,`show`,`icon`  from sys_menu where `tbid` = #{tbid}
+    select `tbid` ,`name` ,`url` ,`isparent` ,`parentid` ,`index` ,`type` ,`show`,`icon`,`sysflag`  from sys_menu where `tbid` = #{tbid}
   </select>
   
   <select id="menuParentWithTbid" resultType="SysMenu" >
-    select `tbid` ,`name` ,`url` ,`isparent` ,`parentid` ,`index` ,`type` ,`show`,`icon`  from sys_menu where  `tbid` = (
+    select `tbid` ,`name` ,`url` ,`isparent` ,`parentid` ,`index` ,`type` ,`show`,`icon`,`sysflag`  from sys_menu where  `tbid` = (
     	select `parentid` from sys_menu where `tbid` = #{menuid}
     )
   </select>
   
   <select id="menusWithLeaf" resultType="SysMenu" >
-    select `tbid` ,`name` ,`url` ,`isparent` ,`parentid` ,`index` ,`type` ,`show`,`icon`  from sys_menu where  `isparent` = 0 and `type` = 1
+    select `tbid` ,`name` ,`url` ,`isparent` ,`parentid` ,`index` ,`type` ,`show`,`icon`,`sysflag`  from sys_menu where  `isparent` = 0 and `type` = 1
   </select>
   
   <select id="menusWithParent" resultType="SysMenu" >
-    select `tbid` ,`name` ,`url` ,`isparent` ,`parentid` ,`index` ,`type` ,`show`,`icon`  from sys_menu where  `parentid` = #{tbid}
+    select `tbid` ,`name` ,`url` ,`isparent` ,`parentid` ,`index` ,`type` ,`show`,`icon`,`sysflag`  from sys_menu where  `parentid` = #{tbid}
   </select>
   
   <select id="menusWithRole" resultType="SysMenu" >
-    select m.`tbid` ,m.`name` ,m.`url` ,m.`isparent` ,m.`parentid` ,m.`index` ,m.`type` ,m.`show`,m.`icon` from sys_menu m,sys_role_menu rm 
+    select m.`tbid` ,m.`name` ,m.`url` ,m.`isparent` ,m.`parentid` ,m.`index` ,m.`type` ,m.`show`,m.`icon`,m.`sysflag` from sys_menu m,sys_role_menu rm 
  	where m.tbid = rm.menuid and m.`isparent` = 0 and rm.roleid = #{roleid}
   </select>
   

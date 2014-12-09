@@ -3,7 +3,7 @@
 <%@ taglib uri="/struts-tags"  prefix="s"%>
 <s:iterator value="menus" id="menu" status="mst">
 	<s:set value="'menuhead'" name="divClass" ></s:set>
-    <div class="${divClass}" menuid="${menu.tbid}" isparent="${menu.isparent}" url="${menu.url}"><a href="#">
+    <div class="${divClass}" menuid="${menu.tbid}" menucode="${menu.menucode}" isparent="${menu.isparent}" url="${menu.url}" sysflag="${menu.sysflag}"><a href="#">
     	<img src="${contextPath}${icon}">&nbsp;&nbsp;<s:property value="#menu.name" /></a></div>
       <s:if test="1 == #menu.isparent">
     	<ul class="nav nav-sidebar" parentid="${menu.tbid}">
@@ -12,7 +12,7 @@
     	  	<s:if test="#st.last">
     	  		<s:set value="'menulink menuitem_b'" name="linkClass" ></s:set>
     	  	</s:if>
-    	  	<li><a href="#" class="${linkClass}" parentid="${menu.tbid}" style="${linkStyle}" url="${submenu.url}"><s:property value="#submenu.name" /></a></li>
+    	  	<li><a href="#" class="${linkClass}" sysflag="${submenu.sysflag}" menucode="${submenu.menucode}" parentid="${menu.tbid}" style="${linkStyle}" menuid="${submenu.tbid}" url="${submenu.url}"><s:property value="#submenu.name" /></a></li>
     	  </s:iterator>
 		</ul>
     </s:if>

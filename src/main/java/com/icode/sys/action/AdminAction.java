@@ -15,7 +15,7 @@ public class AdminAction extends BaseAction {
 	
 	private ResultJson resultJson;
 	
-	private String type;
+	private int parentMenuId;
 	
 	/***
 	 * 进入管理主界面
@@ -50,12 +50,12 @@ public class AdminAction extends BaseAction {
 		this.resultJson = resultJson;
 	}
 
-	public String getType() {
-		return type;
+	public int getParentMenuId() {
+		return parentMenuId;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setParentMenuId(int parentMenuId) {
+		this.parentMenuId = parentMenuId;
 	}
 	
 }

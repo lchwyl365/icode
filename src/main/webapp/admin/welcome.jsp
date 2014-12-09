@@ -24,10 +24,6 @@
 
   <body>
     
-
-    <div class="container-fluid" style="background-color:#00ff00;">
-      hh
-    </div>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

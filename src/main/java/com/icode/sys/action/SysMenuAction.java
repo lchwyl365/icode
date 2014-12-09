@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import com.icode.sys.domain.SysMenu;
 import com.icode.sys.domain.SysUser;
 import com.icode.sys.service.SysMenuService;
+import com.icode.util.DecUtil;
 
 @SuppressWarnings("serial")
 @Controller
@@ -40,7 +41,7 @@ public class SysMenuAction extends BaseAction {
 	 */
 	public String searchMenus(){
 		SysUser user = (SysUser)this.httpSession.getAttribute(SysUser.SYS_LOGIN_USER);
-		if(user == null || sysMenu == null){
+		if(user == null || sysMenu == null){ //|| sysMenu == null
 			backurl = "login.jsp";
 			return "result-jsp";
 		}

@@ -4,6 +4,8 @@
 <% 
    String contextPath = request.getContextPath(); 
    request.setAttribute("contextPath", contextPath);
+   String honyos = "http://localhost:8082/honyos";
+   request.setAttribute("honyos", honyos);
 %>
 <!DOCTYPE html>
 <html lang="zh-cn">
@@ -31,7 +33,7 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <s:action name="menu_searchMenus" namespace="/admin" executeResult="true" ignoreContextParams="true">
-          	<s:param name="menuType" value="type"></s:param> 
+          	<s:param name="sysMenu.tbid" value="parentMenuId"></s:param> 
           </s:action>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" style="padding:0px;">
@@ -45,6 +47,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="${contextPath}/js/jquery.min.js"></script>
     <script src="${contextPath}/js/bootstrap.min.js"></script>
+    <script src="${contextPath}/plugin/jquery.nicescroll/jquery.nicescroll.min.js"></script>
     <script type="text/javascript">
       var currentmenu; //当前展示的menu编号
       //这个的作用是在页面在装载的时候就执行的函数
@@ -58,6 +61,10 @@
           var temp = $(this).attr("menuid");
           
           if (currentmenu == temp) {
+        	  //隐藏上个菜单
+              $(".nav-sidebar").hide("slow");
+              $(".menuselect").removeClass('menuselect');
+              currentmenu = null;
             return;
           };
           currentmenu = temp;
@@ -66,7 +73,14 @@
           if(isparent == 0){
         	  //展示对应的业务页面
         	  var url = $(this).attr("url");
-        	  alert(url);
+        	  var sysflag = $(this).attr("sysflag");
+        	  var menucode = $(this).attr("menucode");
+        	  if(sysflag == 'icode'){
+        		  $("#contentFrame").attr("src",url); 
+        	  }else if(sysflag == 'honyos'){
+        		  var honyosurl = "${honyos}/mobile/sysuser_singleSignOn.action?sysUser.tbid=${sessionScope.sysLoginUser.tbid}&menucode="+menucode;
+        		  $("#contentFrame").attr("src",honyosurl);
+        	  }
           }
           //4、展开菜单
           //隐藏上个菜单
@@ -105,7 +119,14 @@
           
           //展示对应的业务页面
     	  var url = "${contextPath}"+$(this).attr("url");
-    	  $("#contentFrame").attr("src",url);
+    	  var sysflag = $(this).attr("sysflag");
+    	  var menucode = $(this).attr("menucode");
+    	  if(sysflag == 'icode'){
+    		 $("#contentFrame").attr("src",url); 
+    	  }else if(sysflag = 'honyos'){
+    		 var honyosurl = "${honyos}/mobile/sysuser_singleSignOn.action?sysUser.tbid=${sessionScope.sysLoginUser.tbid}&menucode="+menucode;
+    		 $("#contentFrame").attr("src",honyosurl);
+    	  }
         });
 
        // alert("$(window).height():"+;
@@ -113,10 +134,13 @@
         var height = $(window).height() - 70;
      	$("#contentFrame").height(height);
      	
+     	//改变菜单滚动条的样式
+        $(".sidebar").niceScroll();
+     	
      	//顶部连接点击
      	$(".topLink").click(function(){
      		var tbid = $(this).attr("tbid");
-     		alert(tbid);
+     		window.self.location = "${contextPath}/admin/admin_index.action?parentMenuId="+tbid;
      	});
       });
     </script>
