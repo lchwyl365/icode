@@ -29,7 +29,7 @@
   </select>
   
   <select id="menusWithParent" resultType="SysMenu" >
-    select `tbid` ,`name` ,`url` ,`isparent` ,`parentid` ,`index` ,`type` ,`show`,`icon`,`sysflag`  from sys_menu where  `parentid` = #{tbid}
+    select `tbid` ,`name` ,`url` ,`isparent` ,`parentid` ,`index` ,`type` ,`show`,`icon`,`sysflag`  from sys_menu where  `parentid` = #{tbid} order by `index` desc
   </select>
   
   <select id="menusWithRole" resultType="SysMenu" >

@@ -72,11 +72,16 @@
 		  var isparent = $(this).attr("isparent");
           if(isparent == 0){
         	  //展示对应的业务页面
-        	  var url = $(this).attr("url");
+        	  var url = "${contextPath}"+$(this).attr("url");
         	  var sysflag = $(this).attr("sysflag");
         	  var menucode = $(this).attr("menucode");
         	  if(sysflag == 'icode'){
-        		  $("#contentFrame").attr("src",url); 
+        		  if(url == '/icode'){
+        			  alert("功能未开发完成");
+        			  return;
+        		  }else{
+        			  $("#contentFrame").attr("src",url);   
+        		  }
         	  }else if(sysflag == 'honyos'){
         		  var honyosurl = "${honyos}/mobile/sysuser_singleSignOn.action?sysUser.tbid=${sessionScope.sysLoginUser.tbid}&menucode="+menucode;
         		  $("#contentFrame").attr("src",honyosurl);
@@ -122,7 +127,12 @@
     	  var sysflag = $(this).attr("sysflag");
     	  var menucode = $(this).attr("menucode");
     	  if(sysflag == 'icode'){
-    		 $("#contentFrame").attr("src",url); 
+    		  if(url == '/icode'){
+    			  alert("功能未开发完成");
+    			  return;
+    		  }else{
+    			  $("#contentFrame").attr("src",url);   
+    		  }
     	  }else if(sysflag = 'honyos'){
     		 var honyosurl = "${honyos}/mobile/sysuser_singleSignOn.action?sysUser.tbid=${sessionScope.sysLoginUser.tbid}&menucode="+menucode;
     		 $("#contentFrame").attr("src",honyosurl);

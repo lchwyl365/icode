@@ -54,7 +54,7 @@
 			<!-- 分页 -->
 			<nav>
 	      		<ul class="pagination">
-					<pg:pager url="${contextPath}/admin/admin_index.action" items="${pageInfo.total}"	
+					<pg:pager url="${contextPath}/admin/user_initAdmin.action" items="${pageInfo.total}"	
 						export="currentPageNumber=pageNumber">
 						<pg:first>
 								<li class="" ><a  id="firstPage" href="${pageUrl}&pageNumber=${pageNumber}" >首页</a></li>
