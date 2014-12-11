@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import com.icode.sys.domain.SysMenu;
 import com.icode.sys.domain.SysUser;
 import com.icode.sys.service.SysMenuService;
+import com.icode.sys.service.SysRoleService;
 import com.icode.util.DecUtil;
 
 @SuppressWarnings("serial")
@@ -29,6 +30,9 @@ public class SysMenuAction extends BaseAction {
 	
 	@Resource
 	private SysMenuService sysMenuService;
+	
+	@Resource
+	private SysRoleService sysRoleService;
 
 	public String index(){
 		//pager = sysMenuService.search(pager);
@@ -46,8 +50,9 @@ public class SysMenuAction extends BaseAction {
 			return "result-jsp";
 		}
 		
-		//TODO 此处需加缓存类,及按用户权限查询
-		menus = sysMenuService.menusWithParent(sysMenu);
+		//获取用户权限菜单查询
+		menus = sysMenuService.menusWithParent(sysMenu.getTbid(),user.getTbid());
+		
 		backurl = "leftmenu.jsp";
 		return "result-jsp";
 	}

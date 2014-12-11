@@ -13,7 +13,7 @@ public interface SysMenuService {
 	
 	int delete(Long tbid);
 
-	List<SysMenu> menusWithParent(SysMenu sysMenu);
+	List<SysMenu> menusWithParent(Long menuid,Long userid);
 
 	List<SysMenu> menusWithLeaf();
 

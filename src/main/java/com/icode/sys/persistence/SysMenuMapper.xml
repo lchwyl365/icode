@@ -32,6 +32,14 @@
     select `tbid` ,`name` ,`url` ,`isparent` ,`parentid` ,`index` ,`type` ,`show`,`icon`,`sysflag`  from sys_menu where  `parentid` = #{tbid} order by `index` desc
   </select>
   
+  <select id="menusWithParentUser" resultType="SysMenu" >
+    select `tbid` ,`name` ,`url` ,`isparent` ,`parentid` ,`index` ,`type` ,`show`,`icon`,`sysflag`  from sys_menu 
+	where  `parentid` = ${menuid} and `tbid` in 
+	(select DISTINCT(`menuid`) from sys_role_menu where `roleid` in
+	 	(select `roleid` from sys_user_role where `userid` = ${userid}) 
+	) order by `index` desc
+  </select>
+  
   <select id="menusWithRole" resultType="SysMenu" >
     select m.`tbid` ,m.`name` ,m.`url` ,m.`isparent` ,m.`parentid` ,m.`index` ,m.`type` ,m.`show`,m.`icon`,m.`sysflag` from sys_menu m,sys_role_menu rm 
  	where m.tbid = rm.menuid and m.`isparent` = 0 and rm.roleid = #{roleid}

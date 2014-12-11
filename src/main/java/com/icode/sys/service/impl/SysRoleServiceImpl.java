@@ -190,5 +190,7 @@ public class SysRoleServiceImpl implements SysRoleService {
 	public List<SysRole> rolesWithUser(Long userid) {
 		return sysRoleMapper.rolesWithUser(userid);
 	}
+
+
  
 }

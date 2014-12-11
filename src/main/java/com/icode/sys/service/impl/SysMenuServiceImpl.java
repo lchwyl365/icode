@@ -33,13 +33,13 @@ public class SysMenuServiceImpl implements SysMenuService {
 	}
 
 	@Override
-	public List<SysMenu> menusWithParent(SysMenu sysMenu) {
+	public List<SysMenu> menusWithParent(Long menuid, Long userid) {
 		
-		List<SysMenu> menus = sysMenuMapper.menusWithParent(sysMenu);
+		List<SysMenu> menus = sysMenuMapper.menusWithParentUser(menuid,userid);
 		for (int i = 0; i < menus.size(); i++) {
 			SysMenu menu = menus.get(i);
 			if(menu.getIsparent() == 1){
-				List<SysMenu> childs = menusWithParent(menu);
+				List<SysMenu> childs = menusWithParent(menu.getTbid(),userid);
 				menu.setChild(childs);
 			}
 		}
@@ -53,7 +53,7 @@ public class SysMenuServiceImpl implements SysMenuService {
 		
 		// 2.查询子菜单上的按钮
 		for(SysMenu m : menus){
-			List<SysMenu> child = sysMenuMapper.menusWithParent(m);
+			List<SysMenu> child = sysMenuMapper.menusWithParent(m.getTbid());
 			m.setChild(child);
 		}
 		return menus;
