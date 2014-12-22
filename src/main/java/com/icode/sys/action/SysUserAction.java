@@ -75,6 +75,16 @@ public class SysUserAction extends BaseAction {
 		return "result-jsp";
 	}
 	
+	public String initUser(){
+		sysUser = new SysUser();
+		sysUser.setUsername("liuchao");
+		// 1.获取所有的普通用户信息
+		pageInfo = sysUserService.usersWithType(pageNumber,0);
+				
+		backurl = "/admin/user_normal.jsp";
+		return "result-jsp";
+	}
+	
 	public String add(){
 		int result = sysUserService.insert(sysUser);
 		resultJson = new ResultJson(result);

@@ -8,13 +8,13 @@ public class SysUser implements Serializable {
 	
 	public static final String SYS_LOGIN_USER = "sysLoginUser";
 	
-	private Long tbid;//
+	private Long tbid;//用户编号
 	  
 	private String username;//登录账号
 	  
 	private String password;//加密密码
 	  
-	private Integer type;//用户类型  1：管理员 0 ：普通用户 2：vip用户
+	private Integer type;//用户类型  1：管理员  0 ：普通用户  2：系统特殊用户 3：商家
 	  
 	private String nick;//用户昵称
 	  
