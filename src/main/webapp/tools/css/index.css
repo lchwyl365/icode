@@ -179,4 +179,8 @@ table.editTable td {
 .generate_icon:hover{
 	background-color: #19BC9C;
 	color: #FFF;
-};
+}
+.codeDiv{
+	margin:10px 10px; 
+	overflow:hidden;
+}

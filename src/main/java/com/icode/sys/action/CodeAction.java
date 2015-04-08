@@ -58,7 +58,7 @@ public class CodeAction extends BaseAction {
 	private String backurl;
 	
 	public String generate(){
-		/**String realPath = this.httpServletRequest.getSession().getServletContext().getRealPath("/");;
+		String realPath = this.httpServletRequest.getSession().getServletContext().getRealPath("/");;
 		realPath = StringUtils.replace(realPath, "\\", "/");
 		List<Attribute> attrs = new ArrayList<Attribute>();
 		for(int i = 0 ; i < attrName.length; i++){
@@ -73,9 +73,7 @@ public class CodeAction extends BaseAction {
 		filecode = codeService.generateCode(realPath,packageName,className,attrs);
 		String directory = StringUtils.replace(packageName, ".", "/");
 		content = getFileContent(realPath+"download/code/"+filecode+"/src/"+directory+"/domain/"+className+".java");
-		backurl = "/code/export.jsp"; **/
-		
-		
+		backurl = "/code/export.jsp";	
 		return "result-jsp";
 	}
 	

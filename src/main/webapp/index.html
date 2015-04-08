@@ -26,8 +26,8 @@
 
 						<div id="up_btn" class="toolbar-btn moveup_icon">上移</div>
 						<div id="down_btn" class="toolbar-btn movedown_icon">下移</div>
-						<input type="text" value="Test" class="classInput classNameInput">
-						<input type="text" value="com.team" class="classInput packpageNameInput">
+						<input type="text" id="classNameInput" value="Test" class="classInput classNameInput">
+						<input type="text" id="packageNameInput" value="com.team" class="classInput packpageNameInput">
 
 						<div id="generate_btn" class="toolbar-btn generate_icon">生成项目代码</div>
 					</div>
@@ -77,8 +77,12 @@
 		<div class="pager-center" style="padding-bottom:60px;">
 			<div class="pager-card-list">
 				<div class="pager-card">
-					<header class="card-header">生成的代码</header>		
-
+					<header class="card-header">生成的代码</header>	
+					<div class="codeDiv">
+					<iframe id="codeFrame" 
+					src="http://www.baidu.com" 
+					width="100%" height="500px" marginheight="0" marginwidth="0" frameborder="0" scrolling="yes"></iframe>
+					</div>
 				</div>
 			</div>
 
@@ -243,10 +247,20 @@
 	}
 	/**生成代码**/
 	var generateCode = function(){
-
+		
+		var className = $.trim($("#classNameInput").val());
+		var packageName = $.trim($("#packageNameInput").val());
+		if(className == ''){
+			alert('类名不能为空！');
+			return false;
+		}
+		if(packageName == ''){
+			alert('包名不能为空！');
+			return false;
+		}
 		var isprimary = 0;
 		var iserror = 0;
-		var urlstr = '';
+		var urlstr = 'code/code_generate.action?1=1';
 	    $("#attrTable tr").each(function(){   
             var i = $(this).attr("index");
             if(i){
@@ -276,6 +290,7 @@
         	return false;
         }
         
+        $("#codeFrame").attr("src",urlstr);
 	}
 	var changeAttrType = function(){
 		var i = $(this).attr("index");
@@ -336,6 +351,7 @@
 		$(".attrInput").bind("blur",blurAttrInput);
 
 		$(".selectInput").bind("change",changeAttrType);
+
 	}
 
 	$(function() {
