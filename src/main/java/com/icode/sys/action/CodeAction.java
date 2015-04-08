@@ -15,6 +15,10 @@ import org.springframework.stereotype.Controller;
 import com.icode.sys.domain.Attribute;
 import com.icode.sys.service.CodeService;
 
+/***
+ * 生成代码核心Action
+ * @author lch
+ */
 @SuppressWarnings("serial")
 @Controller("codeAction")
 @Scope("prototype")
@@ -31,6 +35,10 @@ public class CodeAction extends BaseAction {
 	private String[] attrPrimary;
 	
 	private String[] attrComment;
+	
+	private String[] attrLength;
+	
+	private String[] attrNull;
 	
 	private String folder;
 	
@@ -50,7 +58,7 @@ public class CodeAction extends BaseAction {
 	private String backurl;
 	
 	public String generate(){
-		String realPath = this.httpServletRequest.getSession().getServletContext().getRealPath("/");;
+		/**String realPath = this.httpServletRequest.getSession().getServletContext().getRealPath("/");;
 		realPath = StringUtils.replace(realPath, "\\", "/");
 		List<Attribute> attrs = new ArrayList<Attribute>();
 		for(int i = 0 ; i < attrName.length; i++){
@@ -65,7 +73,9 @@ public class CodeAction extends BaseAction {
 		filecode = codeService.generateCode(realPath,packageName,className,attrs);
 		String directory = StringUtils.replace(packageName, ".", "/");
 		content = getFileContent(realPath+"download/code/"+filecode+"/src/"+directory+"/domain/"+className+".java");
-		backurl = "/code/export.jsp";
+		backurl = "/code/export.jsp"; **/
+		
+		
 		return "result-jsp";
 	}
 	
@@ -225,6 +235,22 @@ public class CodeAction extends BaseAction {
 
 	public void setBackurl(String backurl) {
 		this.backurl = backurl;
+	}
+
+	public String[] getAttrLength() {
+		return attrLength;
+	}
+
+	public void setAttrLength(String[] attrLength) {
+		this.attrLength = attrLength;
+	}
+
+	public String[] getAttrNull() {
+		return attrNull;
+	}
+
+	public void setAttrNull(String[] attrNull) {
+		this.attrNull = attrNull;
 	}
 	
 }
