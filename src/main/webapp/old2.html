@@ -6,90 +6,18 @@
 <meta content="AutoJCode-Java是一款简洁、快速、高效的Java代码生成工具，能帮助JavaWeb程序员快速完成基础编码，把精力和时间专注于业务逻辑实现上。让程序员不再编写重复的增删改查代码。" name="description" />
 <meta content="Java代码生成,AutoJCode,java 在线 ide,Java自动代码生成,代码生成,软件设计,类设计" name="keywords" />
 <link rel="stylesheet" type="text/css" href="tools/css/index.css">
-<link rel="stylesheet" type="text/css" href="tools/js/google-code-prettify/prettify.css" />
-<style type="text/css">
-.link_btn {
-  display: inline-block;
-  margin-bottom: 0;
-  margin-left: 10px;
-  padding: 5px 10px;
-  text-align: center;
-  vertical-align: middle;
-  border: 1px solid transparent;
-  color: #fff;
-  font-weight: normal;
-  font-size: 16px;
-  line-height: 21px;
-  border-radius: 2px;
-  border-color: #68c8b6;
-  background-color: #5ecfba;
-  text-decoration: none;
-  outline: none;
-}
 </style>
 </head>
 <body>
 	<div class="pager-main">
 		<div class="pager-top">
 			<div class="pager-top-container">
-				<img src="tools/img/logo.png" class="logo">
-				<ul class="nav-ul">
-					<li><a href="#">自动生成代码</a></li>
-					<li><a href="#">代码实例</a></li>
-					<li><a href="#">定制</a></li>
-					<li><a href="#">社区</a></li>
-					<li><a href="#">帮助</a></li>
-				</ul>
-
-				<ul class="login-ul">
-					<li><a href="#">登录</a></li>
-					<li><a href="#">注册</a></li>
-				</ul>
-			</div>
-		</div>
-		<div class="bind-crumbs">
-			<div class="title-container">
-				<div class="title-item icon-code">自动生成代码</div>
-			</div>
-		</div>
-		<div class="sub-title">
-			<div class="title-container">
-				<ul class="menu">
-					<li class="nav-current" cardid="1">
-						<a href="javascript:void(0);">SQL生成代码</a></li>
-					<li  cardid="2"><a href="javascript:void(0);">类生成代码</a></li>
-				</ul>
+				<img src="tools/img/logo.png" style="width:159px;">
 			</div>
 		</div>
 		<div class="pager-center">
 			<div class="pager-card-list">
-				
-				<div class="pager-card menu-card" id="card1" >
-					
-					<div class="card-content">
-						<div class="card-left">
-							<header class="card-header" style="border:0px;">
-								SQL建表语句</header>
-							<div class="sql-content">
-								<textarea class="sql-textarea">粘贴建表语句即可生成项目代码</textarea>
-								<a href="javascript:void(0);" class="textarea-clear-btn" title="清空" style="float: right; margin: 0px 0px 0px 10px; display: none;"></a>
-							</div>
-						</div>
-						<div class="card-right">
-							<header class="card-header" style="border:0px;">
-								<span style="float:left;width:100px;">Java类代码</span>
-								<!--<a class="link_btn" href="javascript:void(0);" data-toggle="modal" data-target="#loginModal">生成代码</a>
-								<div id="sql_generate_btn" class="toolbar-btn generate_icon" 	style="line-height:29px;background-position:5px 4px;">生成代码</div>-->
-								
-							</header>
-							<div class="class-content">
-								<pre id="codePre" class="prettyprint linenums" style="border-radius:0px;min-height:223px;font-size:14px;margin-bottom:0px;margin-top:0px;"></pre>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="pager-card menu-card" id="card2" style="display:none;">
+				<div class="pager-card">
 					<header class="card-header">类的设计</header>
 					<div class="toolbar">
 						<div id="add_btn" class="toolbar-btn add_icon">添加属性</div>
@@ -98,10 +26,10 @@
 
 						<div id="up_btn" class="toolbar-btn moveup_icon">上移</div>
 						<div id="down_btn" class="toolbar-btn movedown_icon">下移</div>
-						<input type="text" value="Test" class="classInput classNameInput">
-						<input type="text" value="com.team" class="classInput packpageNameInput">
+						<input type="text" id="classNameInput" value="Test" class="classInput classNameInput">
+						<input type="text" id="packageNameInput" value="com.team" class="classInput packpageNameInput">
 
-						<div id="generate_btn" class="toolbar-btn generate_icon">生成代码</div>
+						<div id="generate_btn" class="toolbar-btn generate_icon">生成项目代码</div>
 					</div>
 					<table id="attrTable" class="editTable">
 						<tr>
@@ -114,10 +42,7 @@
 							<th style="width:50px;">主键</th>
 						</tr>
 						<tr id="attrRow_1" class="attrRow" index="1">
-							<td>
-					            <img id="triangle_1" class="triangle" 
-					            	src="tools\img\triangle.png" >
-							</td>
+							<td><img id="triangle_1" class="triangle" src="tools\img\triangle.png" ></td>
 							<td>
 								<input id="attrName_1" type="text" index="1" name="attrName" class="attrInput">
 							</td>
@@ -145,15 +70,19 @@
 								<img src="tools\img\primarykey.png" style="display:none;"></td>
 						</tr>
 					</table>
-				</div>
 
+				</div>
 			</div>
 		</div>
 		<div class="pager-center" style="padding-bottom:60px;">
 			<div class="pager-card-list">
 				<div class="pager-card">
-					<header class="card-header" style="margin-left:10px;">生成的代码</header>		
-
+					<header class="card-header">生成的代码</header>	
+					<div class="codeDiv">
+					<iframe id="codeFrame" 
+					src="http://www.baidu.com" 
+					width="100%" height="500px" marginheight="0" marginwidth="0" frameborder="0" scrolling="yes"></iframe>
+					</div>
 				</div>
 			</div>
 
@@ -162,10 +91,6 @@
 
 <script type="text/javascript" src="tools/js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="tools/js/jquery.tmpl.js"></script>
-<script type="text/javascript" src="tools/js/sql2java.js"></script>
-<script type="text/javascript" src="tools/js/sly.min.js"></script>
-<script type="text/javascript" src="tools/js/google-code-prettify/prettify.js"></script>
-
 <script id="rowTemplate" type="text/x-jquery-tmpl">
 <tr id="attrRow_{{= index}}" class="attrRow" style="background-color#ff0000;" index="{{= index}}">
 	<td><img id="triangle_{{= index}}" class="triangle" src="tools\img\triangle.png" ></td>
@@ -322,10 +247,20 @@
 	}
 	/**生成代码**/
 	var generateCode = function(){
-
+		
+		var className = $.trim($("#classNameInput").val());
+		var packageName = $.trim($("#packageNameInput").val());
+		if(className == ''){
+			alert('类名不能为空！');
+			return false;
+		}
+		if(packageName == ''){
+			alert('包名不能为空！');
+			return false;
+		}
 		var isprimary = 0;
 		var iserror = 0;
-		var urlstr = '';
+		var urlstr = 'code/code_generate.action?1=1';
 	    $("#attrTable tr").each(function(){   
             var i = $(this).attr("index");
             if(i){
@@ -355,6 +290,7 @@
         	return false;
         }
         
+        $("#codeFrame").attr("src",urlstr);
 	}
 	var changeAttrType = function(){
 		var i = $(this).attr("index");
@@ -416,47 +352,6 @@
 
 		$(".selectInput").bind("change",changeAttrType);
 
-		//li 内容切换
-		$(".menu li").click(function(){
-			var cls = $(this).attr("class");
-			var cardid = $(this).attr("cardid");
-
-			if(!cls){
-				$(".nav-current").removeClass("nav-current");
-				$(this).addClass("nav-current");
-
-				$(".menu-card").hide();
-				$("#card"+cardid).show();
-			}
-		});
-
-		//改变滚动条的样式
-        //$(".sql-textarea").niceScroll();
-        var options = {
-		    horizontal: 1,
-		    itemNav: 'basic',
-		    speed: 300,
-		    mouseDragging: 1,
-		    touchDragging: 1
-		};
-		//$('.class-content').sly(options);
-
-        $(".sql-textarea").focus(function(){
-        	var val = $(this).val();
-        	if(val=='粘贴建表语句即可生成项目代码'){
-        		$(this).val("");
-        		$(this).css("color","#222222");
-        	}
-        });
-        $(".sql-textarea").blur(function(){
-        	var val = $(this).val();
-        	if(val==''){
-        		$(this).val("粘贴建表语句即可生成项目代码");
-        		$(this).css("color","#BCBCBC");
-        	}else{
-        		
-        	}
-        });
 	}
 
 	$(function() {
