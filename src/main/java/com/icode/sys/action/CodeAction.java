@@ -17,7 +17,7 @@ import com.icode.sys.service.CodeService;
 
 /***
  * 生成代码核心Action
- * @author lch
+ * @author liuchao
  */
 @SuppressWarnings("serial")
 @Controller("codeAction")
