@@ -5,8 +5,8 @@
 <title>AutoJCode-Java代码在线自动生成工具</title>
 <meta content="AutoJCode-Java是一款简洁、快速、高效的Java代码生成工具，能帮助JavaWeb程序员快速完成基础编码，把精力和时间专注于业务逻辑实现上。让程序员不再编写重复的增删改查代码。" name="description" />
 <meta content="Java代码生成,AutoJCode,java 在线 ide,Java自动代码生成,代码生成,软件设计,类设计" name="keywords" />
-<link rel="stylesheet" type="text/css" href="tools/css/index.css">
-<link rel="stylesheet" type="text/css" href="tools/js/google-code-prettify/prettify.css" />
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="js/google-code-prettify/prettify.css" />
 <style type="text/css">
 .link_btn {
   display: inline-block;
@@ -32,7 +32,7 @@
 	<div class="pager-main">
 		<div class="pager-top">
 			<div class="pager-top-container">
-				<img src="tools/img/logo.png" class="logo">
+				<img src="img/logo.png" class="logo">
 				<ul class="nav-ul">
 					<li><a href="#">自动生成代码</a></li>
 					<li><a href="#">代码实例</a></li>
@@ -116,7 +116,7 @@
 						<tr id="attrRow_1" class="attrRow" index="1">
 							<td>
 					            <img id="triangle_1" class="triangle" 
-					            	src="tools\img\triangle.png" >
+					            	src="img/triangle.png" >
 							</td>
 							<td>
 								<input id="attrName_1" type="text" index="1" name="attrName" class="attrInput">
@@ -135,14 +135,14 @@
 							<td><input id="attrComment_1" type="text" name="attrComment" index="1" class="commentInput"></td>
 							<td><input id="attrLength_1" type="text" name="attrLength" value="255"
                                    onkeyup="this.value=this.value.replace(/\D/g,'')" 
-                                   onafterpaste="this.value=this.value.replace(/\D/g,'')" 
+                                   onafterpaste="this.value=this.value.replace(/D/g,'')" 
                                    maxlength="8" index="1" class="lengthInput"></td>
 							<td class="nullTd" index="1">
 								<input id="attrNull_1" type="hidden" value="true">
-								<img src="tools\img\checkbox.png"></td>
+								<img src="img/checkbox.png"></td>
 							<td class="primaryTd" index="1">
 								<input id="attrPrimary_1" type="hidden" value="false">
-								<img src="tools\img\primarykey.png" style="display:none;"></td>
+								<img src="img/primarykey.png" style="display:none;"></td>
 						</tr>
 					</table>
 				</div>
@@ -160,15 +160,15 @@
 		</div>
 	</div>
 
-<script type="text/javascript" src="tools/js/jquery-1.7.2.min.js"></script>
-<script type="text/javascript" src="tools/js/jquery.tmpl.js"></script>
-<script type="text/javascript" src="tools/js/sql2java.js"></script>
-<script type="text/javascript" src="tools/js/sly.min.js"></script>
-<script type="text/javascript" src="tools/js/google-code-prettify/prettify.js"></script>
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="js/jquery.tmpl.js"></script>
+<script type="text/javascript" src="js/sql2java.js"></script>
+<script type="text/javascript" src="js/sly.min.js"></script>
+<script type="text/javascript" src="js/google-code-prettify/prettify.js"></script>
 
 <script id="rowTemplate" type="text/x-jquery-tmpl">
 <tr id="attrRow_{{= index}}" class="attrRow" style="background-color#ff0000;" index="{{= index}}">
-	<td><img id="triangle_{{= index}}" class="triangle" src="tools\img\triangle.png" ></td>
+	<td><img id="triangle_{{= index}}" class="triangle" src="img/triangle.png" ></td>
 	<td>
 		<input id="attrName_{{= index}}" type="text" index="{{= index}}" name="attrName" class="attrInput">
 	</td>
@@ -190,10 +190,10 @@
         onafterpaste="this.value=this.value.replace(/\D/g,'')" ></td>
 	<td class="nullTd" index="{{= index}}">
 		<input id="attrNull_{{= index}}" type="hidden" value="true">
-		<img src="tools\img\checkbox.png"></td>
+		<img src="img/checkbox.png"></td>
 	<td class="primaryTd" index="{{= index}}">
 		<input id="attrPrimary_{{= index}}" type="hidden" value="false">
-		<img src="tools\img\primarykey.png" style="display:none;"></td>
+		<img src="img/primarykey.png" style="display:none;"></td>
 </tr>
 </script>
 <script type="text/javascript">
