@@ -73,7 +73,7 @@ public class CodeAction extends BaseAction {
 		filecode = codeService.generateCode(realPath,packageName,className,attrs);
 		String directory = StringUtils.replace(packageName, ".", "/");
 		content = getFileContent(realPath+"download/code/"+filecode+"/src/"+directory+"/domain/"+className+".java");
-		backurl = "/code/export.jsp";	
+		backurl = "/WEB-INF/jsp/code/export.jsp";
 		return "result-jsp";
 	}
 	
@@ -104,7 +104,7 @@ public class CodeAction extends BaseAction {
 		}else{
 			content = getFileContent(realPath+"download/code/"+filecode+"/WebContent/"+StringUtils.lowerCase(className)+"/"+fileName);
 		}
-		backurl = "/code/export.jsp";
+		backurl = "/WEB-INF/jsp/code/export.jsp";
 		return "result-jsp";
 	}
 	

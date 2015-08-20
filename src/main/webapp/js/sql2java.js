@@ -4,6 +4,7 @@ var className = "Snippet";
 var attrs = new Array();
 
 function generateSqlCode(){
+	
 	var sql = $.trim($(".sql-textarea").val()).toLowerCase();
 
 	sql = sql.replace(/      /g, " ");
@@ -53,7 +54,7 @@ function generateSqlCode(){
 			commentStr = filed.substring(commentStart+9);
 			commentStr = commentStr.substring(0,commentStr.indexOf("'"));
 			
-			console.log("attrComment : "+commentStr);
+			//console.log("attrComment : "+commentStr);
 		}
 		//2.2获取变量名与类型
 		filed = filed.replace(/`/g,'');
@@ -102,19 +103,38 @@ function generateSqlCode(){
 	};
 
 	classContent += " \n}";
-	console.log(classContent);
+	//console.log(classContent);
 	codeStr += '<li class="L0"><span class="pln"> </span></li><li class="L1"><span class="pun">}</span></li></ol>';
 	$("#codePre").html(codeStr);
+}
+
+var generateProjectCode = function(){
+	var packageText = "com.icode.sys";
+	var url = "/code/code_generate.action?packageName="+packageText+"&className="+className;
+	console.log(url);
+	for(var i = 0 ; i < attrs.length; i++){
+		var attr = attrs[i];
+		console.log(attr.attrName + " | "+ attr.attrType + " | "+attr.attrPrimary +" | "+attr.attrComment);
+		url += "&attrName="+attr.attrName+"&attrType="+attr.attrType+"&attrPrimary="+attr.attrPrimary+"&attrComment="+attr.attrComment;
+	}
+
+	$("#contentFrame").attr("src",url);
 }
 
 $(document).ready(function(){
 
 	$(".sql-textarea").change(function(){
+		
+		attrs.length = 0;
+		
         generateSqlCode();
 
         var h = $(".class-content").height() - 16;
         $(".sql-textarea").height(h);
         $(".textarea-clear-btn").show();
+        
+        generateProjectCode(); 	
+    	
     });
     
     /*$("#sql_generate_btn").click(function(){

@@ -152,8 +152,9 @@
 		<div class="pager-center" style="padding-bottom:60px;">
 			<div class="pager-card-list">
 				<div class="pager-card">
-					<header class="card-header" style="margin-left:10px;">生成的代码</header>		
-
+					<header class="card-header" style="margin-left:10px;margin-right:10px;">生成的代码</header>		
+					<iframe id="contentFrame" 
+          				frameborder="0" height="300px;" width="1140px"></iframe>
 				</div>
 			</div>
 
@@ -457,6 +458,10 @@
         		
         	}
         });
+	}
+	
+	var changeCodeFrame = function(h){
+		$("#contentFrame").css("height",h);
 	}
 
 	$(function() {
