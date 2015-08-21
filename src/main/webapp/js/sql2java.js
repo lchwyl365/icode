@@ -111,19 +111,23 @@ function generateSqlCode(){
 var generateProjectCode = function(){
 	var packageText = "com.icode.sys";
 	var url = "/code/code_generate.action?packageName="+packageText+"&className="+className;
-	console.log(url);
+	//console.log(url);
 	for(var i = 0 ; i < attrs.length; i++){
 		var attr = attrs[i];
-		console.log(attr.attrName + " | "+ attr.attrType + " | "+attr.attrPrimary +" | "+attr.attrComment);
+		//console.log(attr.attrName + " | "+ attr.attrType + " | "+attr.attrPrimary +" | "+attr.attrComment);
 		url += "&attrName="+attr.attrName+"&attrType="+attr.attrType+"&attrPrimary="+attr.attrPrimary+"&attrComment="+attr.attrComment;
 	}
 
+	console.log(url);
+	
 	$("#contentFrame").attr("src",url);
 }
 
 $(document).ready(function(){
 
 	$(".sql-textarea").change(function(){
+		
+		layerIndex = layer.msg('加载中', {icon: 16});//又换了种风格，并且设定最长等待10秒 
 		
 		attrs.length = 0;
 		

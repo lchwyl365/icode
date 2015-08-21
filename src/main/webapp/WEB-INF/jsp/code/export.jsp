@@ -11,12 +11,11 @@
 <head>
 <meta charset="utf-8" />
 <title>AutoJCode-Java代码在线自动生成</title>
-<link type="text/css" rel="stylesheet" href="${contextPath}/css/bootstrap.min.css" >
 <link type="text/css" rel="stylesheet" href="${contextPath}/css/docs.css" />
-<link type="text/css" rel="stylesheet" href="${contextPath}/plugin/google-code-prettify/prettify.css" />
-<link type="text/css" rel="stylesheet" href="${contextPath}/plugin/buttons/css/font-awesome.min.css" />
-<link type="text/css" rel="stylesheet" href="${contextPath}/plugin/buttons/css/buttons.css" />
-<link type="text/css" rel="stylesheet" href="${contextPath}/plugin/zTree/css/zTreeStyle/zTreeStyle.css" />
+<link type="text/css" rel="stylesheet" href="${contextPath}/js/google-code-prettify/prettify.css" />
+<link type="text/css" rel="stylesheet" href="${contextPath}/js/buttons/css/font-awesome.min.css" />
+<link type="text/css" rel="stylesheet" href="${contextPath}/js/buttons/css/buttons.css" />
+<link type="text/css" rel="stylesheet" href="${contextPath}/js/zTree/css/zTreeStyle/zTreeStyle.css" />
 <style type="text/css">
 a:hover{text-decoration:none;color:#fff;}
 table{border-collapse:separate;}
@@ -271,10 +270,9 @@ h5{
  	
 <script type="text/javascript" src="${contextPath}/js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="${contextPath}/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="${contextPath}/plugin/lhgdialog/lhgdialog.js?skin=mac"></script>
-<script type="text/javascript" src="${contextPath}/plugin/jquery.tmpl.js"></script>
-<script type="text/javascript" src="${contextPath}/plugin/google-code-prettify/prettify.js"></script>
-<script type="text/javascript" src="${contextPath}/plugin/zTree/js/jquery.ztree.core-3.5.js"></script>
+<script type="text/javascript" src="${contextPath}/js/jquery.tmpl.js"></script>
+<script type="text/javascript" src="${contextPath}/js/google-code-prettify/prettify.js"></script>
+<script type="text/javascript" src="${contextPath}/js/zTree/js/jquery.ztree.core-3.5.js"></script>
 <script id="attrTemplate" type="text/x-jquery-tmpl">
   <tr id="{{= trid}}">
     <td>{{= name}} <input type="hidden" class="attrName" name="attrName" value="{{= name}}"></td>

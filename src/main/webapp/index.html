@@ -90,7 +90,7 @@
 				</div>
 
 				<div class="pager-card menu-card" id="card2" style="display:none;">
-					<header class="card-header">类的设计</header>
+					<header class="card-header" style="margin-left:10px;margin-right:10px;">类的设计</header>
 					<div class="toolbar">
 						<div id="add_btn" class="toolbar-btn add_icon">添加属性</div>
 						<div id="delete_btn" class="toolbar-btn delete_icon">删除属性</div>
@@ -166,6 +166,7 @@
 <script type="text/javascript" src="js/sql2java.js"></script>
 <script type="text/javascript" src="js/sly.min.js"></script>
 <script type="text/javascript" src="js/google-code-prettify/prettify.js"></script>
+<script type="text/javascript" src="js/layer-v1.9.3/layer/layer.js"></script>
 
 <script id="rowTemplate" type="text/x-jquery-tmpl">
 <tr id="attrRow_{{= index}}" class="attrRow" style="background-color#ff0000;" index="{{= index}}">
@@ -198,9 +199,9 @@
 </tr>
 </script>
 <script type="text/javascript">
-
 	var rowIndex = 1;
 	var curIndex = 1;
+	var layerIndex;
 	function clickRow(){
 		var index = $(this).attr("index");
 		curIndex = index;
@@ -222,7 +223,7 @@
 
 		$("#attrType_"+index).css("background-color","#EEF6FF");
 		$("#attrTypeDiv_"+index).css("background-color","#EEF6FF");
-	}
+	};
 	var clickNullTd = function(){
 		var i = $(this).attr("index");
 		var val = $("#attrNull_"+i).val();
@@ -234,7 +235,7 @@
 			$("#attrNull_"+i).val("false");
 			$(this).find('img').hide();
 		}
-	}
+	};
 	var clickPrimaryTd = function(){
 		var i = $(this).attr("index");
 		var val = $("#attrPrimary_"+i).val();
@@ -246,7 +247,7 @@
 			$("#attrPrimary_"+i).val("false");
 			$(this).find('img').hide();
 		}
-	}
+	};
 	/**添加属性行**/
 	var addRow = function(){
 
@@ -281,7 +282,7 @@
 		$(".commentInput").css("background-color","#FFF");
 		$(".selectInput").css("background-color","#FFF");
 		$(".selectInputRight").css("background-color","#FFF");
-	}
+	};
 	/**删除属性行**/
 	var delRow = function(){
 		
@@ -296,7 +297,7 @@
 		//移动箭头到下一行
 		$(".triangle").hide();
 		$("#triangle_"+curIndex).show();
-	}
+	};
 	/**设置主键**/
 	var primaryRow = function(){
 		var i = $("#attrRow_"+curIndex).attr("index");
@@ -309,18 +310,18 @@
 			$("#attrPrimary_"+i).val("false");
 			$("#attrPrimary_"+i).next().hide();
 		}
-	}
+	};
 	/**上下移动行**/
 	var upRow = function(){
 		if($("#attrRow_"+curIndex).prev().attr("index")){
 			$("#attrRow_"+curIndex).prev().before($("#attrRow_"+curIndex));
 		}
-	}
+	};
 	var downRow = function(){
 		if($("#attrRow_"+curIndex).next().attr("index")){
 			$("#attrRow_"+curIndex).next().after($("#attrRow_"+curIndex));
 		}
-	}
+	};
 	/**生成代码**/
 	var generateCode = function(){
 
@@ -344,7 +345,7 @@
 				if(attrPrimary == "true"){
 					isprimary = 1;
 				}
-				urlstr += '&attrPrimary=' + attrPrimary;
+				urlstr += '&attrPrimary=' + isprimary;
             }
         });
         if (iserror == 1) {
@@ -356,7 +357,15 @@
         	return false;
         }
         
-	}
+        layerIndex = layer.msg('加载中', {icon: 16});//又换了种风格，并且设定最长等待10秒 
+        var packageText = $(".packpageNameInput").val();
+        var className = $(".classNameInput").val();
+    	var url = "/code/code_generate.action?packageName="+packageText+"&className="+className+urlstr;
+    	
+    	console.log(url);
+    	$("#contentFrame").attr("src",url);
+        
+	};
 	var changeAttrType = function(){
 		var i = $(this).attr("index");
 		var val = $(this).val();
@@ -373,7 +382,7 @@
 		}else if(val == 'Date'){
 			$("#attrLength_"+i).val(0);
 		}
-	}
+	};
 	/**翻译后加注释**/
 	var blurAttrInput = function(){
 		var v1 = $(this).val();
@@ -392,7 +401,7 @@
 		    });*/
 
 		}
-	}
+	};
 	/**绑定事件**/
 	var bindEvent = function() {
 
@@ -458,11 +467,17 @@
         		
         	}
         });
-	}
+        
+        layerIndex = layer.msg('加载中', {icon: 16});//又换了种风格，并且设定最长等待10秒 
+    	$("#contentFrame").load(function(){ 
+    		//关闭
+    		layer.close(layerIndex); 
+    	});
+	};
 	
 	var changeCodeFrame = function(h){
 		$("#contentFrame").css("height",h);
-	}
+	};
 
 	$(function() {
 
